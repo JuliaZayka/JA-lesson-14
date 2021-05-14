@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="ua.lviv.hbm.xml.Cart" table="cart">
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="name" column="name" type="string" />
+		<property name="total" column="total" type="int" />
+
+		<set name="items" table="i_c" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="cart_id" not-null="true"></column>
+			</key>
+			<many-to-many entity-name="ua.lviv.hbm.xml.Item">
+				<column name="item_id" not-null="true"></column>
+			</many-to-many>
+		</set>
+
+	</class>
+</hibernate-mapping>
